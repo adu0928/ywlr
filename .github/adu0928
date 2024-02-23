@@ -1,0 +1,24 @@
+name: Daily Auto Update
+
+on:
+  schedule:
+    - cron: "59 */1 * * *"
+  push:
+    branches:
+    - master 
+
+jobs:
+  update-repo:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Clone repository
+        uses: actions/checkout@v3
+
+      - name: Auto Update
+        run: |
+          git config --local user.email "adu0928@163.com"
+          git config --local user.name "adu0928"
+          git remote set-url origin https://${{ github.actor }}:${{ secrets.GITHUB_TOKEN }}@github.com/${{ github.repository }}
+          git pull --rebase
+          git commit --allow-empty -m "你来了，我走了，我一直再这里等你，你快来呀！！！"
+          git push
