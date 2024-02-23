@@ -1,14 +1,14 @@
-name: Daily Auto Update
+name: go to yes
 
 on:
   schedule:
-    - cron: "59 */1 * * *"
+    - cron: "56 */1 * * *"
   push:
     branches:
-    - main 
+    - master 
 
 jobs:
-  update-repo:
+  autogreen:
     runs-on: ubuntu-latest
     steps:
       - name: Clone repository
